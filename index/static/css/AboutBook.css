@@ -1,0 +1,10 @@
+.book-cover {
+    max-width: 100%;
+}
+
+@media(max-width: 767.98px) { 
+    .book-cover {
+        max-width: 50%;
+        margin-left: 25%;
+    }
+}

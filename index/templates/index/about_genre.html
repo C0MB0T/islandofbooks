@@ -1,0 +1,22 @@
+{% extends "index/wrapper.html" %}
+
+
+{% load staticfiles %}
+{% block loader %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container my-3" style="min-height: 500px;">
+    <h3 class="text-center">{{genre.title}}</h3>
+    <p>{{genre.description}}</p>
+    <h4>Некоторые представители:</h4>
+    <ul>
+        {% for book in books %}
+            <li><a href="{% url 'Detail_Book' book.id %}" class="text-secondary">{{book.title}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "index/wrapper.html" %}
+
+
+{% block content %}
+    <div class="container my-3">
+        <h4 class="text-center"><a href="{% url 'Detail_Book' book.book.id %}" class="text-info book-title">{{book.book.title}}</a> - читать онлайн {{book.title}}</h4>
+
+        <ul>
+            {% for i in books %}
+                <li><a href="{% url 'ReadChapter' i.id %}" class="text-secondary">{{i.title_chapter}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <style>
+        @media (max-width: 991.98px) {
+            .book-title{
+                font-size: 40px;
+            }
+        }
+    </style>
+{% endblock %}

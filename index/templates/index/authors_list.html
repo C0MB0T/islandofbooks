@@ -1,0 +1,29 @@
+{% extends "index/wrapper.html" %}
+
+{% load staticfiles %}
+{% block loader %}
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <h4>Выберите букву</h4>
+    {% for char in chars %}
+        <div class="btn btn-outline-info" onclick="get_authors('{{char}}')">{{char}}</div>
+    {% endfor %}
+    <div class="dropdown-divider"></div>
+    <div id="filter-char" style="display: none"></div>
+    <div id="authors" style="min-height: 500px">
+        
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block script %}
+    <script src="{% static 'js/author_list.js' %}"></script>
+    <script>get_authors('random');</script>
+{% endblock %}

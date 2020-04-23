@@ -1,0 +1,23 @@
+{% for author in authors %}
+    <h5>
+        &bull;<a class="text-secondary" href="{% url 'Detail_Author' author.id %}"> {{author.name}} </a>
+    </h5>   
+{% endfor %}
+
+{% if pages != 1 %}
+    <ul class="pagination justify-content-center" style="position: absolute; bottom: 0; left:50%; transform: translate(-50%, 0);">
+        <li class="page-item {% if last == 0 %}disabled{% endif %}">
+            <div class="page-link text-info" onclick="get_page('{% if last != 0 %}{{last}}{% endif %}')"><span aria-hidden="true">&laquo;</span></div>
+        </li>
+
+        {% for i in pages %}
+        <li class="page-item">
+            <div class="page-link text-info {% if page == i %}pressed{% endif %}" {% if page != i %}onclick="get_page('{{i}}')"{% endif %}>{{i}}</div>
+        </li>
+        {% endfor %}
+
+        <li class="page-item {% if next == 0 %}disabled{% endif %}">
+            <div class="page-link text-info" onclick="get_page('{% if next != 0 %}{{next}}{% endif %}')"><span aria-hidden="true">&raquo;</span></div>
+        </li>
+    </ul>
+{% endif %}

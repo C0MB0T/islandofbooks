@@ -1,0 +1,53 @@
+{% extends "index/wrapper.html" %}
+
+
+{% load staticfiles %}
+{% block loader %}
+    <link rel="stylesheet" href="{% static 'css/AboutBook.css' %}" type="text/css">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container my-3">
+        <h3 class="text-center">{{book.title}} <div class="btn btn-outline-info" onclick="slow_scroll('#dow-read')">Скачать / Читать</div></h3>
+            <div class="row">
+                <div class="col-md-9 col-sm-7 col-12">
+                    <h5>Автор :
+                        {% for i in book.authorbook.all %}
+                        <a href="/authors/{{i.id}}" class="text-secondary mx-2">{{i.name}}</a>
+                        {% endfor %}
+                    </h5>
+                    <h5>Жанр :
+                        {% for i in book.genre.all %}
+                        <a href="/genre/{{i.id}}" class="text-secondary mx-2">{{i.title}}</a>
+                        {% endfor %}
+                    </h5>
+                </div>
+                {% if book.cover %}
+                <div class="col-md-3 ">
+                    <img src="{{book.cover.url}}" alt="" class="book-cover">
+                </div>
+                {%endif %}
+            </div>
+            <h4 class="text-center">Описание :</h4>
+            
+            {% for i in book.get_text %}
+            <p>{{i}}</p>
+            {% endfor %}
+            
+            <h5 id="dow-read">Читать :</h5>
+            <ul>
+                {% for i in book.bookread_set.all %}
+                <li><a href="{% url 'ReadBook' i.id %}" class="text-secondary">{{i.title}}</a></li>
+                {% endfor %}
+            </ul>
+            
+            <h5 id="dow-read">Ссылки на скачивание :</h5>
+            <ul>
+            {% for i in book.bookfile_set.all %}
+            <li><a href="{{i.book_file.url}}" class="text-secondary" download="">{{i.title}}</a></li>
+            {% endfor %}
+            </ul>
+    </div>
+    {{book.view_plus}}                  
+{% endblock %}

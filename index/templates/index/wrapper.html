@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        {% load staticfiles %}
+
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+        <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Bahianita&display=swap" rel="stylesheet">
+        <link rel="icon" href="{% static 'image/favicon.png' %}" type="image/x-icon">
+
+        <title>{{title}}</title>
+        {% block loader %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="content-min">
+        <div class="shadow" id="top">
+                <nav class="navbar navbar-light bg-darkblue navbar-expand-xl">
+                        <div class="container">
+                                <a class="navbar-brand text-light" href="/">
+                                    <img class="logo-img" src="{% static 'image/icon.png' %}" alt="logo">
+                                    Island of Books
+                                </a>
+            
+                                <button class="navbar-toggler" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <!-- <span class="line"></span>
+                                    <span class="line"></span>
+                                    <span class="line"></span> -->
+                                    <img src="{% static 'image/searchicon.png' %}" alt="" class="logo-img">
+                                </button> 
+            
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item">
+                                            <div class="dropdown-divider"></div>
+                                        </li>
+                                    </ul>
+            
+                                    <form class="form-inline my-2 my-lg-0" action="{% url 'Search' %}">
+                                        <input class="form-control mr-sm-2" type="search" placeholder="Искать на сайте" aria-label="Search" name="search">
+                                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><span class="btn-search">Поиск</span></button>
+                                    </form>                                    
+                                </div>
+                        </div>
+                    </nav>
+            
+                    <div class="bg-lightblue">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4 text-center text-menu"><a href="{% url 'index' %}" class="text-dark">Главная</a></div>
+                                <div class="col-4 text-center text-menu"><a href="{% url 'book_list' %}" class="text-dark">Книги</a></div>
+                                <div class="col-4 text-center text-menu"><a href="{% url 'author_list' %}" class="text-dark">Авторы</a></div>            
+                            </div>
+                        </div>
+                    </div>            
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 my-block shadow col-12">
+                    <div class="content">
+                        {% block content %} 
+                        {% endblock %}
+                    </div>                   
+                </div>
+                <div class="col-lg-3 sbar">    
+                        <div class="my-block shadow" id="quote">
+                            
+                        </div>
+                        <div class="my-block shadow" id="random-book">
+                            <h3>Сайдбар</h3>
+                        </div>                                 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="basement bg-darkblue">
+        <div class="container">
+            <h6>&copy; 2019 Автор проекта: <span class="my-name">Шишков Артём</span></h6>
+        </div>
+    </div>
+
+    <div class="arrow_to_top" style="display: none;">
+        <a id="arrow_to_top" onclick="slow_scroll('#top')"><img class="logo-img" src="{% static 'image/arrow_to_top.png' %}" alt="" ></a>
+    </div>
+
+
+    <style>
+        .text-quote{
+            padding: 20px 20px 0 20px;
+        }
+        .author-quote{
+            text-align: right;
+            padding: 15px;
+        }
+    </style>
+    
+        <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/slick.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        
+        
+        {% block script %}
+        {% endblock %}
+        <script>
+            if (document.documentElement.clientWidth > 991){
+            $.ajax({
+                url: '/get_quote',
+                success: function(data){
+                    $('#quote').html(data);
+                }
+            })
+            $.ajax({
+                url: '/get_book',
+                data: {'book' : window.location.pathname},
+                success: function(data){
+                    $('#random-book').html(data);
+                }
+            })
+            }
+        </script>
+
+    </body>
+</html>

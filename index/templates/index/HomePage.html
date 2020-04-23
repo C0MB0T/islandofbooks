@@ -1,0 +1,90 @@
+{% extends "index/wrapper.html" %}
+
+
+{% block loader %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/HomePage.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+<h3 class="text-center my-3">Добро пожаловать на наш сайт</h3>
+
+<img src="{% static 'image/mainlist.jpg' %}" alt="image" class="logo-main">
+
+<h5 class="text-center mb-5" style="width: 82%; margin-left: 9%; font-size: 1.5rem;"> На нашем сайте вы можете найти литературу XVIII - XIX вв. школьного курса и не только. Здесь вы можете читать книги онлайн или же скачать</h5>
+
+<!--Популярные книги-->
+<h5 class="mx-5" style="margin-top: 20px;">Популярные книги:</h5>
+<div class="my-carusel container">
+    {% for book in books_popular %}
+    <div>
+        <a href="{% url 'Detail_Book' book.id %}" class="text-secondary">
+        <div class="card container my-card">
+            <h5 style="text-align: center">{{book}}</h5>
+            {% if book.cover %}
+                <img src="{{book.cover.url}}" alt="" style="width: 100%; height: auto; border-radius: 7px;">
+            {% endif %}
+        </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<h5 class="mx-5" style="margin-top: 40px;">Недавно посещенные:</h5>
+<div class="my-carusel container">
+        {% for book in books_visit %}
+        <div>
+            <a href="{% url 'Detail_Book' book.id %}" class="text-secondary">
+            <div class="card container my-card">
+                <h5 style="text-align: center">{{book}}</h5>
+                {% if book.cover %}
+                    <img src="{{book.cover.url}}" alt="" style="width: 100%; height: auto; border-radius: 7px">
+                {% endif %}
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+</div>
+
+<h5 class="mx-5" style="margin-top: 40px;">Последние добавленные:</h5>
+<div class="my-carusel container" style="max-width: 100%; margin-bottom: 25px;">
+        {% for book in books_created %}
+        <div>
+            <a href="{% url 'Detail_Book' book.id %}" class="text-secondary">
+            <div class="card container my-card">
+                <h5 style="text-align: center">{{book}}</h5>
+                {% if book.cover %}
+                    <img src="{{book.cover.url}}" alt="" style="width: 100%; height: auto; border-radius: 7px;">
+                {% endif %}
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('.my-carusel').slick({
+                slidesToShow: 5,
+                slidesToScroll: 4,
+                autoplay: true,
+                autoplaySpeed: 3500,
+                responsive: [
+                    {
+                        breakpoint: 991,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 2,
+                            autoplaySpeed: 3000,
+                        }
+                    }
+                ]
+        });
+    });
+    </script>
+{% endblock %}

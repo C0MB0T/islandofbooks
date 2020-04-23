@@ -1,0 +1,12 @@
+.author-foto {
+    float: right;
+    max-width: 30%;
+}
+
+@media (max-width: 991.98px) {
+    .author-foto {
+        float: none;
+        margin-left: 10%;
+        max-width: 80%;
+    }
+}

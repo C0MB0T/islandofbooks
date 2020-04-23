@@ -1,0 +1,23 @@
+{% extends "index/wrapper.html" %}
+
+
+{% load staticfiles %}
+{% block loader %}
+    <link rel="stylesheet" href="{% static 'css/read_chapter.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+                <div class="container my-3">
+                    <h5>{% if chapter.book_read.chapter_set.count != 1 %}<a href="{% url 'ReadBook' chapter.book_read.book.id %}" class="text-info"> Содержание </a>
+                        {% else %}<a href="{% url 'Detail_Book' chapter.book_read.book.id %}" class="text-info">{{chapter.book_read.book}}</a>{% endif %}</h5>
+                    <h4 class="text-center">{{chapter.title_chapter}}</h4>
+                    {% for txt in chapter.get_text %}
+                        {% if txt != '\n' %}
+                            <p style="white-space: pre-wrap;">{{txt}}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                
+                {% if previos != 0 %}<a href="{% url 'ReadChapter' previos %}" class="previos"><span class="arrow text-dark">&lt;</span></a>{% endif %}
+                {% if next != 0 %}<a href="{% url 'ReadChapter' next %}" class="next"><span class="arrow text-dark">&gt;</span></a>{% endif %}
+{% endblock %}

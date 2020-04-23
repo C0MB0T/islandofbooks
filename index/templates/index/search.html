@@ -1,0 +1,39 @@
+{% extends "index/wrapper.html" %}
+
+
+
+{% block content %}
+<div class="container my-3">
+    <form class="form-row my-2 my-lg-0" action="{% url 'Search' %}" id="form">
+        <div class="col-10">
+            <input class="form-control mr-sm-2" type="search" placeholder="Искать на сайте" aria-label="Search" name="search" value="{{query}}">
+        </div>
+        <div class="col">            
+            <button class="btn btn-block btn-outline-info my-2 my-sm-0" type="submit"><span class="btn-search">Поиск</span></button>
+        </div>
+    </form>  
+    
+    {% if result_author or result_book %}
+    {% if result_book %}
+    <h4 class="pt-2">Книги:</h4>
+        {% for book in result_book %}
+        <h5>
+            &bull;<a href="{% url 'Detail_Book' book.id %}" class="text-secondary"> {{book}} </a>
+        </h5>
+        {% endfor %}
+    {% endif %}
+
+
+    {% if result_author %}
+    <h4 class="pt-4">Авторы:</h4>
+        {% for author in result_author %}
+        <h5>
+            &bull;<a href="{% url 'Detail_Author' author.id %}" class="text-secondary"> {{author}} </a>
+        </h5>
+        {% endfor %}
+    {% endif %}
+    {% else %}
+        <h3 class="my-4" style="min-height: 400px;"> По вашему запросу ничего не найдено... </h3>
+    {% endif %}
+</div>
+{% endblock %}

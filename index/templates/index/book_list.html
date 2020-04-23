@@ -1,0 +1,35 @@
+{% extends "index/wrapper.html" %}
+
+{% load staticfiles %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="filter">
+            <button class="btn btn-outline-info my-2" onclick="get_books('genre')">По жанрам</button>
+            <button class="btn btn-outline-info my-2" onclick="get_books('author')">По авторам</button>
+            <button class="btn btn-outline-info my-2" onclick="get_books('all')">Все</button>
+            <button class="btn btn-outline-info my-2" onclick="get_books('popular')">Популярные</button>
+            <button class="btn btn-outline-info my-2" onclick="get_books('new_books')">Последние добавленные</button>
+            <button class="btn btn-outline-info my-2" onclick="get_books('visit_last')">Недавно просмотренные</button>
+        </div>
+        <div id="list_char"></div>
+        <div class="dropdown-divider"></div>
+        <div id="filter-value" style="display: none"></div>
+
+        <div id="books" style="min-height: 500px">
+            
+        </div>
+
+
+        
+    </div>
+
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'js/book_list.js' %}"></script>
+    <script>get_books('random');</script>
+{% endblock %}

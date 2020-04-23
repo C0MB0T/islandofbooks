@@ -1,0 +1,28 @@
+{% extends "index/wrapper.html" %}
+
+
+{% load staticfiles %}
+{% block loader %}
+    <link rel="stylesheet" href="{% static 'css/AboutAuthor.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="container my-3">
+    <h3 class="text-center">{{author.name}} <div class="btn btn-outline-info" onclick="slow_scroll('#links')">Произведения</div> </h3>
+    <div class="text-bio">
+        <img src="{{author.img.url}}" alt="" class="author-foto">
+        {% for p in author.biog %}
+            <p>{{p}}</p>
+        {% endfor %}
+    </div>
+    <div class="links" id="links">
+        <h4>Некоторые произведения:</h4>
+        <ul>
+            {% for book in books %}
+                <li><a href="{% url 'Detail_Book' book.id %}" class="text-secondary">{{book.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

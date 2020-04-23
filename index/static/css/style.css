@@ -1,0 +1,146 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial;
+}
+
+body, html {
+    height: 100%
+}
+.logo-img {
+    width: 45px;
+}
+
+.bg-darkblue {
+    background: #0a557a;
+}
+
+.bg-lightblue {
+    background: #3ca0d0;
+}
+
+.line {
+    background: #b1c7da;
+    border-radius: 4px;
+    margin: 5px 0;
+    display: block;
+    width: 25px;
+    height: 3px;
+}
+
+.navbar-toggler {
+    border: #d3cfcf solid 2px;
+    color: #d3cfcf;
+    border-radius: 10px;
+}
+
+.my-block {
+    background: #eef3f5;
+    border-radius: 5px;
+    margin-top: 25px;
+}
+
+.center{
+    margin: 0;
+    position: absolute;               
+    top: 50%;
+    left: 50%;                         
+    transform: translate(-50%, -50%)
+}
+
+.block-list {
+    background: #e4e7e9;
+    margin-bottom: 20px; 
+    border-radius: 0px;
+    padding-left: 15px;
+    padding-top: 7px;
+}
+
+.container {
+    max-width: 1100px;
+}
+.navbar-brand {
+    font-size: 27px;
+}
+
+.pressed {
+    background-color: #eaeaee;
+}
+
+.basement {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    margin-top: 50px;
+    bottom: 0;
+    left: 0;
+    color: #929ea8; 
+}
+.my-name {
+    color: #b1c7da;
+}
+.content-min {
+    min-height: calc(100% - 100px);
+}
+.content {
+    min-height: 600px;
+}
+
+.arrow_to_top {
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.arrow_to_top:hover{
+    opacity: 1;
+}
+
+@media (max-width: 991.98px) {
+    .arrow_to_top {
+        right: 50px;
+        bottom: 50px;
+    }
+    .sbar {
+        display: none;
+    }
+    .navbar-brand {
+        font-size: 54px;
+    }
+    .logo-img {
+        width: 90px;
+    }
+    .btn-search {
+        font-size: 30px;
+    }
+    .form-control {
+        height: 58px;
+        width: 70%;
+        font-size: 30px;
+    }
+    a {
+        font-size: 30px;
+    }
+    .btn {
+        font-size: 30px;      
+    }
+    h3 {
+        font-size: 45px;
+    }
+    h4 {
+        font-size: 40px;
+    }
+    h5 {
+        font-size: 35px;
+    }
+    h6 {
+        font-size: 30px;    
+    }
+    p {
+        font-size: 28px;
+    }
+    .pagination {
+        font-size: 30px;
+    }
+ }

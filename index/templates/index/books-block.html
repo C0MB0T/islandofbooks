@@ -1,0 +1,69 @@
+{% if type == 'books' %}
+    {% if paginator != 'no' %}
+        {% for book in books %}
+            <h5>
+                &bull;<a class="text-secondary" href="{% url 'Detail_Book' book.id %}"> {{book.title}} </a>
+            </h5>               
+        {% endfor %} 
+    {% else %}
+    <h5 class="container text-secondary">Пожалуйста выберите на какую букву начинается книга</h5>
+            <div class="container">
+                {% for char in chars %}
+                    <div class="btn btn-outline-secondary m-1" onclick="get_books('genre ' + $('#filter-value').html() +  ' {{char}}')">
+                        {{ char }}
+                    </div>
+                {% endfor %}
+            </div>        
+    {% endif %} 
+{% elif type == 'genres' %}
+    {% for genre in genres %}
+    <h5>
+        &bull;<a class="text-secondary ona" onclick="get_books('{{genre.title}}')" style="cursor: pointer;"> {{genre.title}} </a>
+    </h5>                
+    {% endfor %}
+{% elif type == 'chars' %}
+    <h5 class="container text-secondary">Пожалуйста выберите букву</h5>
+    <div class="container">
+        {% for char in chars %}
+            <div class="btn btn-outline-secondary m-1" onclick="get_books({% if author %}'author '{% else %}'all '{% endif %} + '{{char}}')">
+                {{ char }}
+            </div>
+        {% endfor %}
+    </div>
+{% elif type == 'chars-b' %}
+    <h5 class="container text-secondary">Пожалуйста выберите букву</h5>
+    <div class="container">
+        {% for char in chars %}
+            <div class="btn btn-outline-secondary m-1" onclick="get_books('author '+ 'X ' + '{{name}} ' + '{{char}}')">
+                {{ char }}
+            </div>
+        {% endfor %}
+    </div>
+{% elif type == 'authors' %}
+    {% for author in authors %}
+        <h5>
+            &bull;<a class="text-secondary" onclick="get_books('author x ' + '{{author.name}}')" > {{author.name}} </a>
+        </h5> 
+    {% endfor %}
+{% endif %}
+
+
+{% if paginator != 'no' %}
+{% if pages != 1 %}
+    <ul class="pagination justify-content-center" style="position: absolute; bottom: 0; left:50%; transform: translate(-50%, 0);">
+        <li class="page-item {% if last == 0 %}disabled{% endif %}">
+            <div class="page-link text-info" onclick="get_page('{% if last != 0 %}{{last}}{% endif %}')"><span aria-hidden="true">&laquo;</span></div>
+        </li>
+
+        {% for i in pages %}
+        <li class="page-item">
+            <div class="page-link text-info {% if page == i %}pressed{% endif %}" {% if page != i %}onclick="get_page('{{i}}')"{% endif %}>{{i}}</div>
+        </li>
+        {% endfor %}
+
+        <li class="page-item {% if next == 0 %}disabled{% endif %}">
+            <div class="page-link text-info" onclick="get_page('{% if next != 0 %}{{next}}{% endif %}')"><span aria-hidden="true">&raquo;</span></div>
+        </li>
+    </ul>
+{% endif %}
+{% endif %}
